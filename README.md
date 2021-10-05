@@ -2,25 +2,26 @@
 
 To create the environment:
 
-`conda create --name fast_explore python==3.9 \
-conda activate fast_explore \
-conda install -c conda-forge rdkit=2020.09.1 \
-conda install pytorch cudatoolkit=11.1 -c pytorch -c nvidia \
-conda install -c conda-forge jupyterlab \
-conda install -c rdkit rdkit \
-conda activate mol_explore_3 \
-conda install -c conda-forge hydra \
-conda install -c anaconda networkx \
-conda install -c conda-forge tensorboardx \
-conda install -c conda-forge cairosvg \
-pip install chemprop \
-pip install oddt \
-pip install -U scikit-learn==0.22.1 \
-pip install p_tqdm \
-pip install selfies \
-pip install hydra-core --upgrade \
-pip install tensorboard \
-pip install -e .`
+`
+    conda create --name fast_explore python==3.9
+    conda activate fast_explore 
+    conda install -c conda-forge rdkit=2020.09.1 
+    conda install pytorch cudatoolkit=11.1 -c pytorch -c nvidia 
+    conda install -c conda-forge jupyterlab 
+    conda install -c rdkit rdkit 
+    conda activate mol_explore_3 
+    conda install -c conda-forge hydra 
+    conda install -c anaconda networkx 
+    conda install -c conda-forge tensorboardx 
+    conda install -c conda-forge cairosvg 
+    pip install chemprop 
+    pip install oddt 
+    pip install -U scikit-learn==0.22.1 
+    pip install p_tqdm 
+    pip install selfies 
+    pip install hydra-core --upgrade 
+    pip install tensorboard 
+    pip install -e .`
 
 To run VQ-VAE pretrain:
 
