@@ -1,0 +1,101 @@
+# train
+num_train_steps: 2e6
+max_steps: -1
+num_procs: 64
+seed: 1
+verbose: False
+# eval
+eval_frequency: 20
+log_frequency: 200
+num_eval_episodes: 10
+# misc
+log_save_tb: true
+device: cuda
+lr: 2e-4
+# GAE
+gamma: 0.999
+gae_lambda: 0.95
+# rl
+task: gsk+jnk+qed+sa
+init_basis: None
+fragment_actions: None
+
+# Number of molecules to extract
+num_mols: 5000 
+expname: threshold
+
+
+frag_vae:
+  model_path: None
+  latent_dim: ???
+  n_embed: ???
+
+env:
+  _target_: mol_explore.rl.env.VecChemEnv
+  num_envs: ${num_procs}
+  sim_threshold: [0.4,0.5]
+  sim_func: mixed
+  fp_type: morgan
+  frontier_factor: 1.0  # Relax the frontier constraint to allow more initial basis
+  prop_factor: 1.0 
+  use_ucb_scores: True
+
+env_reg:
+  _target_: mol_explore.rl.env_reg.VecChemEnv
+  num_envs: ${num_procs}
+  fp_type: morgan
+  prop_threshold: 1
+  sim_threshold: .0
+  frontier_factor: 1.0  # Relax the frontier constraint to allow more initial basis
+  prop_factor: 1.0
+  relaxed_reward: False
+
+encoder:
+  _target_: mol_explore.models.graph_encoder.GraphEncoder
+  rnn_type: LSTM
+  hidden_size: 200
+  depth: 4
+
+agent:
+  _target_: mol_explore.rl.algo.PPOAgent
+  batch_size: 32
+  ppo_epoch: 3
+  num_mini_batch: 8
+  clip_param: 0.2
+  value_loss_coef: 0.5
+  entropy_coef: 0.01
+  type_entropy_coef: 1
+  lr: ${lr}
+  eps: 1e-5
+  max_grad_norm: 0.5
+  device: ${device}
+  match_dist: True
+
+actor:
+  _target_: mol_explore.rl.models.Actor
+  action_dim: ${frag_vae.latent_dim}
+  n_embed: ${frag_vae.n_embed}
+  node_fdim: ${encoder.hidden_size}
+  hidden_dim: 1024
+  hidden_depth: 1
+  frag_input: node+graph # type of embedding used for fragment prediction, node, graph, or node+graph
+  action_type: discrete # choices: [continous, discrete, fixed]
+  action_max: 1.0
+  action_min: 0.0
+
+critic:
+  _target_: mol_explore.rl.models.Critic
+  node_fdim: ${encoder.hidden_size}
+  hidden_dim: 256
+  hidden_depth: 1
+
+storage:
+  _target_: mol_explore.rl.storage.ChemBuffer
+  action_dim: ${frag_vae.latent_dim}
+  num_steps: 8
+  num_procs: ${num_procs}
+  action_type: ${actor.action_type}
+
+hydra:
+  run:
+    dir: None
