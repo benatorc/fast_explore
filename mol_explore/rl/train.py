@@ -20,10 +20,10 @@ from mol_explore.utils.visualize_utils import draw_mol
 FRONTIER_KEYS = ['smiles', 'fps']
         
 ACTIVES_PATHS = {
-    'gsk': '/data/rsg/chemistry/bensonc/mol_explore/mol_explore/data/gsk3/actives.txt',
-    'jnk': '/data/rsg/chemistry/bensonc/mol_explore/mol_explore/data/jnk3/actives.txt',
-    'gsk+jnk': '/data/rsg/chemistry/bensonc/mol_explore/mol_explore/data/dual_gsk3_jnk3/actives.txt', 
-    'zinc': '/data/rsg/chemistry/bensonc/mol_explore/mol_explore/data/zinc/zinc_input.json', }
+    'gsk': 'data/gsk3/actives.txt',
+    'jnk': 'data/jnk3/actives.txt',
+    'gsk+jnk': 'data/gsk3_jnk3/actives.txt', 
+    'zinc': 'data/zinc/zinc_input.json', }
 
 class Workspace(object):
     def __init__(self, cfg, workdir=None):

@@ -19,9 +19,9 @@ from mol_explore.rl.rewards import prop_qualified, TASK2SF
 import pdb
 
 ACTIVES = {
-    'gsk': '/data/rsg/chemistry/bensonc/mol_explore/mol_explore/data/gsk3/actives.txt',
-    'jnk': '/data/rsg/chemistry/bensonc/mol_explore/mol_explore/data/jnk3/actives.txt',
-    'gsk+jnk': '/data/rsg/chemistry/bensonc/mol_explore/mol_explore/data/dual_gsk3_jnk3/actives.txt',
+    'gsk': 'data/gsk3/actives.txt',
+    'jnk': 'data/jnk3/actives.txt',
+    'gsk+jnk': 'data/gsk3_jnk3/actives.txt',
 }
 
 def clean_smiles(smiles):

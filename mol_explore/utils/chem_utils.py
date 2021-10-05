@@ -122,31 +122,6 @@ def delete_bond(smiles, e_idx):
         return Chem.MolToSmiles(frags[0])
     else:
         return Chem.MolToSmiles(frags[1])
-    # except:
-    #     print('Cannot delete bond for smiles: %s bond u (%d) -> v (%d)' % (
-    #         smiles, u, v))
-
-# def delete_bond(smiles, u, v):
-#     mol = Chem.MolFromSmiles(smiles)
-
-#     emol = Chem.RWMol(mol)
-#     try:
-#         emol.RemoveBond(u, v)
-
-#         mapping = []
-#         frags = list(Chem.rdmolops.GetMolFrags(emol,
-#             asMols=True, fragsMolAtomMapping=mapping))
-
-#         if len(frags) == 1:
-#             return Chem.MolToSmiles(emol)
-
-#         if u in mapping[0]:
-#             return Chem.MolToSmiles(frags[0])
-#         else:
-#             return Chem.MolToSmiles(frags[1])
-#     except:
-#         print('Cannot delete bond for smiles: %s bond u (%d) -> v (%d)' % (
-#             smiles, u, v))
 
 def get_scaffold_dict(smiles_list):
     # Takes in a list of smiles, outputs a mapping of the scaffold smiles to

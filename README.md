@@ -23,7 +23,7 @@ pip install hydra-core --upgrade \
 pip install tensorboard \
 pip install -e . \
 
-To run VQ-VAE pretrain:
+To run VQ-VAE pretrain (make sure to unzip the chembl data files):
 
 `python pretrain.py --data_dir data/chembl --vocab_path data/chembl/vocab_selfies.pl --model_type vqvae --output_dir output --batch_size 32 --latent_size 10 --n_embed 10 --depth 4 --hidden_size 200 --save_steps 5000 --autoregressive --vq_coef 1. --commit_coef 1.`
 
